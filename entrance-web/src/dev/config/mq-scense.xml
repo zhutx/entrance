@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+	<channelList>
+		<channel name="recognize_log"  type="BROADCAST" exchange="recognize_log" autoAck="true" qos="true"  durable="false"/>
+	</channelList>
+</configuration>

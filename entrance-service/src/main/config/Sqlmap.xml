@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration 
+PUBLIC "-//ibatis.apache.org//DTD Config 3.0//EN" 
+"http://ibatis.apache.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+    <settings>
+        <setting name="useGeneratedKeys" value="true" />
+        <setting name="autoMappingBehavior" value="FULL" />
+    </settings>
+
+    <mappers> 
+        <mapper resource="com/xier/sesame/attence/dbMap/mysql/RecognizeRecord.xml" />
+        <mapper resource="com/xier/sesame/attence/dbMap/mysql/SwitchSetting.xml" />
+        <mapper resource="com/xier/sesame/attence/dbMap/mysql/TimeSetting.xml" />
+        <mapper resource="com/xier/sesame/attence/dbMap/mysql/SubjectConfig.xml" />
+        <mapper resource="com/xier/sesame/attence/dbMap/mysql/Subject.xml" />
+        <mapper resource="com/xier/sesame/attence/dbMap/mysql/OrgSubject.xml" />
+        <mapper resource="com/xier/sesame/attence/dbMap/mysql/DeviceConfig.xml" />
+        <mapper resource="com/xier/sesame/attence/dbMap/mysql/auth.xml" />
+        <mapper resource="com/xier/sesame/attence/dbMap/mysql/NewSwitchSetting.xml" />
+        <mapper resource="com/xier/sesame/attence/dbMap/mysql/OffLinePassword.xml" />
+        <mapper resource="com/xier/sesame/attence/dbMap/mysql/RecognizeDailyReport.xml" />
+    </mappers> 
+    
+
+</configuration>

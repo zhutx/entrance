@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" 
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="OrgAuth">
+			
+	<resultMap id="OrgAuthResultMap" type="com.xier.sesame.attence.domain.OrgAuthDO">
+	<result column="auth_id" property="authId" />
+	<result column="org_id" property="orgId" />
+	<result column="platform_code" property="platformCode" />
+	<result column="access_id" property="accessId" />
+	<result column="access_key" property="accessKey" />
+	<result column="status" property="status" />
+	<result column="gmt_create" property="gmtCreate" />
+	<result column="gmt_modify" property="gmtModify" />
+	</resultMap>
+	
+	<insert id="insert" parameterType="com.xier.sesame.attence.domain.OrgAuthDO">
+		insert into attence_auth(
+			auth_id,
+			org_id,
+			platform_code,
+			access_id,
+			access_key,
+			status,
+			gmt_create,
+			gmt_modify	
+		)
+		values (
+		 	#{authId},
+			#{orgId},
+			#{platformCode},
+			#{accessId},
+			#{accessKey},
+			#{status},
+        	now(6),
+        	now(6)
+		)
+	</insert>
+	
+	<update id="update" parameterType="com.xier.sesame.attence.domain.OrgAuthDO">
+		update attence_auth
+		<set>
+		<if test="platformCode != null">
+			platform_code=#{platformCode},
+		</if>
+		<if test="accessId != null">
+			access_id=#{accessId},
+		</if>
+		<if test="accessKey != null">
+			access_key=#{accessKey},
+		</if>
+		<if test="status != null">
+			status=#{status},
+		</if>
+			gmt_modify = now(6)
+		</set>
+		where
+			auth_id = #{authId}
+	</update>
+   
+ 	<select id="queryDOById" parameterType="long" resultMap="OrgAuthResultMap">
+		<include refid="sql_select"/>
+		from attence_auth
+		where auth_id = #{authId}
+	</select>
+	
+	 <select id="queryDOByOrgId" parameterType="long" resultMap="OrgAuthResultMap">
+		<include refid="sql_select"/>
+		from attence_auth
+		where org_id = #{orgId} and status = 1
+	</select>
+	
+	<delete id="deleteById" parameterType="long">
+		delete from attence_auth
+		where
+		auth_id = #{authId}
+ 	</delete>
+ 	
+	<select id="queryUsableList" resultMap="OrgAuthResultMap" >
+        <include refid="sql_select"/>
+        from attence_auth
+        where status = 1 order by auth_id
+    </select>
+    
+    <select id="queryAllList" resultMap="OrgAuthResultMap" >
+        <include refid="sql_select"/>
+        from attence_auth
+        where 1=1 order by auth_id
+    </select>
+	
+	<sql id="sql_select">
+		select
+			auth_id,
+			org_id,
+			platform_code,
+			access_id,
+			access_key,
+			status,
+			gmt_create,
+			gmt_modify	
+	</sql>  
+</mapper>

@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" 
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="com.xier.sesame.attence.Subject">
+			
+	<resultMap id="SubjectResultMap" type="com.xier.sesame.attence.domain.Subject">
+	<result column="subject_id" property="subjectId" />
+	<result column="subject_code" property="subjectCode" />
+	<result column="subject_name" property="subjectName" />
+	<result column="subject_desc" property="subjectDesc" />
+	<result column="show_img" property="showImg" />
+	<result column="bg_img" property="bgImg" />
+	<result column="logo_img" property="logoImg" />
+	<result column="hold_seconds" property="holdSeconds" />
+	<result column="default_flag" property="defaultFlag" />
+	<result column="gmt_create" property="gmtCreate" />
+	<result column="gmt_modify" property="gmtModify" />
+	</resultMap>
+	
+	<insert id="addSubject" parameterType="com.xier.sesame.attence.domain.Subject">
+		insert into attence_subject(
+			subject_id,
+			subject_code,
+			subject_name,
+			subject_desc,
+			show_img,
+			bg_img,
+			logo_img,
+			hold_seconds,
+			default_flag,
+			gmt_create,
+			gmt_modify	
+		)
+		values (
+		 	#{subjectId},
+			#{subjectCode},
+			#{subjectName},
+			#{subjectDesc},
+			#{showImg},
+			#{bgImg},
+			#{logoImg},
+			#{holdSeconds},
+			#{defaultFlag},
+			now(3),
+			now(3)
+		)
+	</insert>
+	
+	<select id="getExistOneSubject" parameterType="map" resultMap="SubjectResultMap">
+		<include refid="sql_select"/>
+		from attence_subject
+		where 
+			subject_code = #{subjectCode} or subject_name = #{subjectName}
+	</select>
+	
+	<update id="clearDefault" parameterType="map">
+ 	    update attence_subject set default_flag = #{newDefaultFlag} where default_flag = #{oldDefaultFlag}
+ 	</update>
+ 	
+ 	<select id="findAll" resultMap="SubjectResultMap">
+	   <include refid="sql_select"/>
+		from attence_subject
+		order by gmt_create desc
+	</select>
+	
+	<select id="getSubjectById" parameterType="long" resultMap="SubjectResultMap">
+		<include refid="sql_select"/>
+		from attence_subject
+		where 
+			subject_id = #{subjectId}
+	</select>
+	
+	<select id="getDefaultSubject" resultMap="SubjectResultMap">
+		<include refid="sql_select"/>			
+	    from attence_subject where default_flag = '1'
+	</select>
+	
+	
+	<sql id="sql_where">
+	    from attence_subject
+	    <where>
+    	<if test="subjectId != null">
+		      subject_id = #{subjectId}
+		</if>
+		<if test="subjectCode != null">
+		      and subject_code = #{subjectCode}
+		</if>
+		<if test="subjectName != null">
+		      and subject_name = #{subjectName}
+		</if>
+		<if test="showImg != null">
+		      and show_img = #{showImg}
+		</if>
+		<if test="defaultFlag != null">
+		      and default_flag = #{defaultFlag}
+		</if>
+		</where>
+	</sql>  	
+	
+	<sql id="sql_select">
+		select
+			subject_id,
+			subject_code,
+			subject_name,
+			subject_desc,
+			show_img,
+			bg_img,
+			logo_img,
+			hold_seconds,
+			default_flag,
+			gmt_create,
+			gmt_modify	
+	</sql>  
+</mapper>

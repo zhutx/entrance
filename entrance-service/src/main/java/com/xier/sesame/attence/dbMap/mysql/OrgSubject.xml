@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" 
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="com.xier.sesame.attence.OrgSubject">
+			
+	<resultMap id="OrgSubjectResultMap" type="com.xier.sesame.attence.domain.OrgSubject">
+	<result column="org_subject_id" property="orgSubjectId" />
+	<result column="org_id" property="orgId" />
+	<result column="subject_id" property="subjectId" />
+	<result column="subject_code" property="subjectCode" />
+	<result column="subject_name" property="subjectName" />
+	<result column="subject_desc" property="subjectDesc" />
+	<result column="show_img" property="showImg" />
+	<result column="bg_img" property="bgImg" />
+	<result column="logo_img" property="logoImg" />
+	<result column="hold_seconds" property="holdSeconds" />
+	<result column="gmt_create" property="gmtCreate" />
+	<result column="gmt_modify" property="gmtModify" />
+	</resultMap>
+	
+ 	<select id="getOrgSubject" parameterType="map" resultMap="OrgSubjectResultMap">
+		<include refid="sql_select"/>
+		from attence_org_subject
+		where 
+		    org_id = #{orgId}
+			and subject_id = #{subjectId}
+	</select>
+	
+	<insert id="insertOrUpdate" parameterType="com.xier.sesame.attence.domain.OrgSubject">
+		insert into attence_org_subject(
+		    org_subject_id,
+		    org_id,
+			subject_id,
+			subject_code,
+			subject_name,
+			subject_desc,
+			show_img,
+			bg_img,
+			logo_img,
+			hold_seconds,
+			gmt_create,
+			gmt_modify	
+		) values (
+		    #{orgSubjectId},
+		    #{orgId},
+		 	#{subjectId},
+			#{subjectCode},
+			#{subjectName},
+			#{subjectDesc},
+			#{showImg},
+			#{bgImg},
+			#{logoImg},
+			#{holdSeconds},
+			now(3),
+			now(3)
+		) ON DUPLICATE KEY update show_img = #{showImg}, bg_img = #{bgImg}, logo_img = #{logoImg}, hold_seconds = #{holdSeconds}, gmt_modify = now(3)
+	</insert>
+	
+	<sql id="sql_select">
+		select
+		    org_subject_id,
+		    org_id,
+			subject_id,
+			subject_code,
+			subject_name,
+			subject_desc,
+			show_img,
+			bg_img,
+			logo_img,
+			hold_seconds,
+			gmt_create,
+			gmt_modify	
+	</sql>  
+</mapper>

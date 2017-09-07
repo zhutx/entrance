@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<parent>
+		<artifactId>entrance-parent</artifactId>
+		<groupId>com.moredian.entrance</groupId>
+		<version>0.0.1</version>
+	</parent>
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>entrance-web</artifactId>
+	<version>${current.version}</version>
+
+	<properties>
+		<current.version>0.0.1-SNAPSHOT</current.version>
+		<skynet.api.version>0.0.1-SNAPSHOT</skynet.api.version>
+		<entrance.api.version>0.0.1-SNAPSHOT</entrance.api.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<mavenBuildTimestamp>${maven.build.timestamp}</mavenBuildTimestamp>
+		<maven.build.timestamp.format>yyyy-MM-dd HH:mm:ss</maven.build.timestamp.format>
+		<cglib.version>3.1</cglib.version>
+		<aspectj.version>1.7.2</aspectj.version>
+		<spring.version>4.2.4.RELEASE</spring.version>
+		<oracle.version>10.2.0.1.0</oracle.version>
+		<mysql.version>5.1.31</mysql.version>
+		<druid.version>1.0.7</druid.version>
+		<logback.version>1.1.2</logback.version>
+		<org.slf4j.version>1.7.7</org.slf4j.version>
+		<netty.verison>4.0.24.Final</netty.verison>
+		<commons-lang.version>2.6</commons-lang.version>
+		<commons-io.version>2.3</commons-io.version>
+		<commons-configuration.version>1.10</commons-configuration.version>
+		<poi.version>3.13</poi.version>
+		<junit.version>4.11</junit.version>
+		<jetty.version>9.2.2.v20140723</jetty.version>
+	</properties>
+  
+	<profiles>
+		<profile>
+			<id>dev</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+            <properties>
+                <package.environment>dev</package.environment>
+            </properties>
+		</profile>
+		<profile>
+			<id>test</id>
+            <properties>
+                <package.environment>test</package.environment>
+            </properties>
+		</profile>
+		<profile>
+			<id>show</id>
+            <properties>
+                <package.environment>show</package.environment>
+				<current.version>0.0.1</current.version>
+				<skynet.api.version>0.0.1</skynet.api.version>
+				<entrance.api.version>0.0.1</entrance.api.version>
+            </properties>
+		</profile>
+	</profiles>
+	
+	<dependencies>
+		<dependency>
+			<groupId>com.moredian.entrance</groupId>
+			<artifactId>entrance-api</artifactId>
+			<version>${entrance.api.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.xier.sesame.common</groupId>
+			<artifactId>common-profiler</artifactId>
+			<version>0.0.1</version>
+		</dependency>
+		<dependency>
+			<groupId>com.xier.uif</groupId>
+			<artifactId>account-api</artifactId>
+			<version>0.0.1</version>
+		</dependency>
+		<dependency>
+			<groupId>com.xier.sesame.rabbit</groupId>
+			<artifactId>rabbit</artifactId>
+			<version>0.0.2</version>
+		</dependency>
+		<dependency>
+			<groupId>com.xier.sesame.earthworm</groupId>
+			<artifactId>earthworm-mq-sdk</artifactId>
+			<version>0.0.1</version>
+		</dependency>
+		<dependency>
+			<groupId>com.xier.cloudeye</groupId>
+			<artifactId>cloudeye-core</artifactId>
+			<version>0.0.2</version>
+		</dependency>
+		<dependency>
+			<groupId>com.xier.sesame.pigeon</groupId>
+			<artifactId>pigeon-api</artifactId>
+			<version>0.5.0-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>com.xier.sesame</groupId>
+			<artifactId>sesame-parent-web</artifactId>
+			<version>0.0.1</version>
+			<type>pom</type>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-logging</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.xier.sesame.common</groupId>
+			<artifactId>common-filemanager</artifactId>
+			<version>0.0.1</version>
+		</dependency>
+		<dependency>
+			<groupId>com.xier.sesame.common</groupId>
+			<artifactId>common-base</artifactId>
+			<version>0.0.2</version>
+		</dependency>
+		<dependency>
+			<groupId>com.xier.sesame.rabbit</groupId>
+			<artifactId>rabbit</artifactId>
+			<version>0.0.2</version>
+		</dependency>
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-core-asl</artifactId>
+			<version>1.9.13</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-mapper-asl</artifactId>
+			<version>1.9.13</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.quartz-scheduler</groupId>
+			<artifactId>quartz</artifactId>
+			<version>2.2.2</version>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-lang</groupId>
+			<artifactId>commons-lang</artifactId>
+			<version>${commons-lang.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>${commons-io.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-configuration</groupId>
+			<artifactId>commons-configuration</artifactId>
+			<version>${commons-configuration.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi</artifactId>
+			<version>${poi.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>druid</artifactId>
+			<version>${druid.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.thoughtworks.xstream</groupId>
+			<artifactId>xstream</artifactId>
+			<version>1.4.2</version>
+		</dependency>
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>1.16.12</version>
+		</dependency>
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger2</artifactId>
+			<version>2.2.2</version>
+		</dependency>
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger-ui</artifactId>
+			<version>2.2.2</version>
+		</dependency>
+		<dependency>
+			<groupId>com.moredian.skynet</groupId>
+			<artifactId>skynet-api</artifactId>
+			<version>${skynet.api.version}</version>
+		</dependency>
+
+	</dependencies>
+	<build>
+		<plugins>
+			<!-- The configuration of maven-jar-plugin -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<version>2.6</version>
+				<!-- The configuration of the plugin -->
+				<configuration>
+					<!-- Configuration of the archiver -->
+					<archive>
+
+						<!-- 生成的jar中，不要包含pom.xml和pom.properties这两个文件 -->
+						<addMavenDescriptor>false</addMavenDescriptor>
+
+						<!-- Manifest specific configuration -->
+						<manifest>
+							<!-- 是否要把第三方jar放到manifest的classpath中 -->
+							<addClasspath>true</addClasspath>
+							<!-- 生成的manifest中classpath的前缀，因为要把第三方jar放到lib目录下，所以classpath的前缀是lib/ -->
+							<classpathPrefix>lib/</classpathPrefix>
+							<!-- 应用的main class -->
+							<mainClass>com.xier.sesame.cloudeye.web.AppStarter</mainClass>
+						</manifest>
+					</archive>
+					<!-- 过滤掉不希望包含在jar中的文件 -->
+					<excludes>
+						<exclude>${project.basedir}\src\main\bin\*</exclude>
+						<exclude>${project.basedir}\src\main\resources\*.properties</exclude>
+						<exclude>${project.basedir}\src\main\assembly\*</exclude>
+					</excludes>
+				</configuration>
+			</plugin>
+
+			<!-- The configuration of maven-assembly-plugin -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<version>2.6</version>
+				<!-- The configuration of the plugin -->
+				<configuration>
+				    <finalName>${project.artifactId}</finalName>
+					<!-- Specifies the configuration file of the assembly plugin -->
+					<descriptors>
+						<descriptor>src/main/assembly/package.xml</descriptor>
+					</descriptors>
+				</configuration>
+				<executions>
+					<execution>
+						<id>make-assembly</id>
+						<phase>package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+</project>
