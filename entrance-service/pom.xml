@@ -1,166 +1,151 @@
-﻿<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
+
 	<parent>
-		<groupId>com.moredian.entrance</groupId>
-		<artifactId>entrance-parent</artifactId>
+		<groupId>com.moredian.bee</groupId>
+		<artifactId>bee-pom-parent</artifactId>
 		<version>0.0.1</version>
 	</parent>
+
+	<groupId>com.moredian.entrance</groupId>
 	<artifactId>entrance-service</artifactId>
-	<version>${current.version}</version>
-	
- 	<properties>
-		<current.version>0.0.1-SNAPSHOT</current.version>
+	<packaging>jar</packaging>
+	<version>${project.version}</version>
+
+	<name>skynet-service</name>
+	<description></description>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<java.version>1.7</java.version>
+		<project.version>0.0.1-SNAPSHOT</project.version>
+		<moredian.bee.dependencies.version>0.0.1-SNAPSHOT</moredian.bee.dependencies.version>
 		<entrance.api.version>0.0.1-SNAPSHOT</entrance.api.version>
 		<skynet.api.version>0.0.1-SNAPSHOT</skynet.api.version>
+		<moredian.fishnet.cloudeye.api.version>0.0.3-SNAPSHOT</moredian.fishnet.cloudeye.api.version>
 	</properties>
-  
-	<profiles>
-		<profile>
-			<id>dev</id>
-			<activation>
-				<activeByDefault>true</activeByDefault>
-			</activation>
-            <properties>
-                <package.environment>dev</package.environment>
-            </properties>
-		</profile>
-		<profile>
-			<id>test</id>
-            <properties>
-                <package.environment>test</package.environment>
-            </properties>
-		</profile>
-		<profile>
-			<id>show</id>
-            <properties>
-                <package.environment>show</package.environment>
-				<current.version>0.0.1</current.version>
-				<entrance.api.version>0.0.1</entrance.api.version>
-				<skynet.api.version>0.0.1</skynet.api.version>
-            </properties>
-		</profile>
-	</profiles>
-		
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>com.moredian.bee</groupId>
+				<artifactId>bee-pom-dependencies</artifactId>
+				<version>${moredian.bee.dependencies.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 	<dependencies>
-		<dependency>
-			<groupId>com.moredian.entrance</groupId>
-			<artifactId>entrance-api</artifactId>
-			<version>${entrance.api.version}</version>
-		</dependency>
 		<dependency>
 			<groupId>com.moredian.skynet</groupId>
 			<artifactId>skynet-api</artifactId>
 			<version>${skynet.api.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>com.xier.sesame.pigeon</groupId>
-			<artifactId>pigeon-api</artifactId>
-			<version>0.0.1</version>
+			<groupId>com.moredian.cloudeye.core</groupId>
+			<artifactId>cloudeye-core-api</artifactId>
+			<version>${moredian.fishnet.cloudeye.api.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>com.xier.sesame.rabbit</groupId>
-			<artifactId>rabbit</artifactId>
-			<version>0.0.2</version>
-		</dependency>
-		<dependency>
-			<groupId>com.xier.sesame.common</groupId>
-			<artifactId>common-mybatisboot</artifactId>
-			<version>0.0.1</version>
-		<!--	<exclusions>
-				<exclusion>
-					<groupId>org.mybatis</groupId>
-					<artifactId>mybatis</artifactId>
-				</exclusion>
-			</exclusions>-->
-		</dependency>
-		<dependency>
-			<groupId>com.xier.sesame.common</groupId>
-			<artifactId>common-base</artifactId>
-			<version>0.0.2</version>
-		</dependency>
-		<dependency>
-			<groupId>com.xier.sesame.common</groupId>
-			<artifactId>common-filemanager</artifactId>
-			<version>0.0.1</version>
-		</dependency>
-		<dependency>
-			<groupId>com.xier.cloudeye</groupId>
-			<artifactId>cloudeye-api</artifactId>
-			<version>0.0.1</version>
-		</dependency>
-		<dependency>
-			<groupId>com.xier.sesame.idgenerator</groupId>
-			<artifactId>idgenerator-api</artifactId>
-			<version>0.0.1</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-autoconfigure</artifactId>
-		</dependency>
-		<!--
-		<dependency>
-			<groupId>com.xier.sesame.earthworm</groupId>
-			<artifactId>earthworm-mq-sdk</artifactId>
-			<version>0.0.1</version>
-		</dependency>
-		-->
-		<dependency>
-			<groupId>mysql</groupId>
-			<artifactId>mysql-connector-java</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-test</artifactId>
-			<scope>test</scope>
-		</dependency>
-        <dependency>
-            <groupId>com.thoughtworks.xstream</groupId>
-            <artifactId>xstream</artifactId>
-            <version>1.4.9</version>
+            <groupId>com.xier.uif</groupId>
+            <artifactId>account-api</artifactId>
+            <version>0.0.1</version>
         </dependency>
+<!-- 		<dependency> -->
+<!--             <groupId>com.moredian.pigeon</groupId> -->
+<!--             <artifactId>pigeon-api</artifactId> -->
+<!--             <version>0.0.1-SNAPSHOT</version> -->
+<!--         </dependency> -->
+        <dependency>
+		  <groupId>com.xier.sesame.pigeon</groupId>
+		  <artifactId>pigeon-api</artifactId>
+		  <version>0.4.0-SNAPSHOT</version>
+		</dependency>
 		<dependency>
-			<groupId>org.projectlombok</groupId>
-			<artifactId>lombok</artifactId>
-			<version>1.16.12</version>
+			<groupId>com.xier.guard</groupId>
+			<artifactId>guard-api</artifactId>
+			<version>0.1.0-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>com.moredian.bee</groupId>
+			<artifactId>bee-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.moredian.bee</groupId>
+			<artifactId>bee-cache-memcached</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.moredian.bee</groupId>
+			<artifactId>bee-mybatisboot</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.moredian.bee</groupId>
+			<artifactId>bee-filemanager</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-redis</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>com.moredian.bee</groupId>
 			<artifactId>bee-rmq</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
-        <dependency>
-            <groupId>javax.validation</groupId>
-            <artifactId>validation-api</artifactId>
-            <version>1.1.0.Final</version>
-        </dependency>
-        <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-validator</artifactId>
-            <version>5.2.4.Final</version>
-        </dependency>
-<!--        <dependency>
-            <groupId>org.mybatis</groupId>
-            <artifactId>mybatis</artifactId>
-            <version>3.4.0</version>
-        </dependency>-->
 		<dependency>
-			<groupId>com.moredian.cloudeye.core</groupId>
-			<artifactId>cloudeye-core-api</artifactId>
-			<version>0.0.2-SNAPSHOT</version>
+			<groupId>com.moredian.clinkz</groupId>
+			<artifactId>idgen</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>com.moredian.clinkz</groupId>
+			<artifactId>idgen-unify</artifactId>
+		</dependency>
+		<dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.24</version>
+        </dependency>
 	</dependencies>
+
 	<build>
+		<resources>
+			<resource>
+				<directory>${project.basedir}/src/main/java</directory>
+				<includes>
+					<include>**/*.xml</include>
+				</includes>
+				<filtering>false</filtering>
+			</resource>
+			<resource>
+				<directory>${project.basedir}/src/main/resources</directory>
+				<includes>
+					<include>**/*</include>
+				</includes>
+				<filtering>false</filtering>
+			</resource>
+		</resources>
+		<testResources>
+			<testResource>
+				<directory>${project.basedir}/src/test/java</directory>
+				<includes>
+					<include>**/*.xml</include>
+				</includes>
+				<filtering>false</filtering>
+			</testResource>
+			<testResource>
+				<directory>${project.basedir}/src/test/resources</directory>
+				<includes>
+					<include>**/*</include>
+				</includes>
+				<filtering>false</filtering>
+			</testResource>
+		</testResources>
 		<plugins>
 			<!-- The configuration of maven-jar-plugin -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-jar-plugin</artifactId>
-				<version>2.6</version>
 				<!-- The configuration of the plugin -->
 				<configuration>
 					<!-- Configuration of the archiver -->
@@ -176,7 +161,7 @@
 							<!-- 生成的manifest中classpath的前缀，因为要把第三方jar放到lib目录下，所以classpath的前缀是lib/ -->
 							<classpathPrefix>lib/</classpathPrefix>
 							<!-- 应用的main class -->
-							<mainClass>com.xier.sesame.idgenerator.Start</mainClass>
+							<mainClass>com.moredian.sesame.idgenerator.Start</mainClass>
 						</manifest>
 					</archive>
 					<!-- 过滤掉不希望包含在jar中的文件 -->
@@ -192,10 +177,9 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-assembly-plugin</artifactId>
-				<version>2.6</version>
 				<!-- The configuration of the plugin -->
 				<configuration>
-				    <finalName>${project.artifactId}</finalName>
+					<finalName>${project.artifactId}</finalName>
 					<!-- Specifies the configuration file of the assembly plugin -->
 					<descriptors>
 						<descriptor>src/main/assembly/package.xml</descriptor>
@@ -211,6 +195,49 @@
 					</execution>
 				</executions>
 			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>attach-sources</id>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
 		</plugins>
 	</build>
+
+	<profiles>
+		<profile>
+			<id>dev</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<properties>
+				<package.environment>dev</package.environment>
+			</properties>
+		</profile>
+		<profile>
+			<id>test</id>
+			<properties>
+				<package.environment>test</package.environment>
+			</properties>
+		</profile>
+		<profile>
+			<id>show</id>
+			<properties>
+				<package.environment>show</package.environment>
+				<project.version>0.0.1</project.version>
+				<moredian.bee.dependencies.version>0.0.1</moredian.bee.dependencies.version>
+				<entrance.api.version>0.0.1</entrance.api.version>
+				<skynet.api.version>0.0.1</skynet.api.version>
+				<moredian.fishnet.cloudeye.api.version>0.0.3</moredian.fishnet.cloudeye.api.version>
+			</properties>
+		</profile>
+	</profiles>
+
+
 </project>
